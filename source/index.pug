@@ -1,0 +1,75 @@
+//- Assets.
+- var fileCSS = 'assets/css/main.min.css'
+- var fileJS = 'assets/js/main.min.js'
+
+//- Social medias.
+- var socialFacebook = '#'
+- var socialTwitter = '#'
+- var socialLinkedin = '#'
+- var socialYoutube = '#'
+- var socialInstagram = '#'
+
+//- Mixin for links to social media.
+mixin social(title, href, icon)
+  li
+    a(href=href title=title target="_blank" aria-label=`Ir para nossa página no ${title}`)
+
+html
+  head
+    title Neon
+
+    link(type="text/css" href=fileCSS ref="stylesheet")
+  body
+    header.header(role="banner")
+      div.grid
+        div.header__group-home
+          a.button-hallow(href="#" title="Início" aria-label="Voltar para a página inicial") Início
+        div.header__group-logo
+          h1
+            img(src="http://via.placeholder.com/167x37" alt="Neon" aria-label="Logo Neon")
+        div.header__group-download
+          a.button-warning(href="#" title="Baixar App" target="_blank" aria-label="Baixar nosso aplicativo") Baixar o APP
+
+    main.home
+      div.grid
+        div.home__group-title
+          h2 Tipo um banco,
+            strong só que mais seguro
+
+        div.carousel
+          button.button-hallow
+            img(src="http://via.placeholder.com/65x65")
+
+          div.carousel__slides
+            div.card
+              img(src="http://via.placeholder.com/150x150" alt="Biometria" aria-labelledby="about-neon-biometria")
+              h3#about-neon-biometria Biometria
+
+              hr
+
+              p Reconhecimento por selfie ou digital, tudo para oferecer o máximo de segurança.
+
+              a.button-success(href="#" title="Saiba mais" aria-label="Ler mais sobre nossa biometria") Saiba mais
+
+          button.button-hallow
+            img(src="http://via.placeholder.com/65x65")
+
+    footer.base-footer(role="content-info")
+      div.grid
+        div.base-footer__group-phone
+          h3
+            small Atendimento
+            big 0800-606-7688
+        div.base-footer__group-social
+          ul
+            +social('Facebook', socialFacebook)
+            +social('Twitter', socialTwitter)
+            +social('LinkedIn', socialLinkedin)
+            +social('YouTube', socialYoutube)
+            +social('Instagram', socialInstagram)
+        div.base-footer__group-address
+          p
+            small Banco Neon S.A - CNPJ 00.253.448/0001-17
+              address Av. Raja Gabaglia, 1143/17°andar - CEP: 30380-403 <br /> Luxemburgo - Belo Horizonte - MG
+
+    script(type="text/javascript" href=fileJS)
