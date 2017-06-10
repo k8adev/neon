@@ -40,6 +40,11 @@ $fonts = {
 body {
   font-family: $fonts.family.default;
   font-weight: $fonts.weight.regular;
+  line-height: 1.4;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  display: inline-block;
 }
 
 h1, .heading--extra-highlight {
@@ -67,11 +72,11 @@ h6, .heading--tiny {
 }
 
 big {
-  font-size: $fonts.size.large;
+  font-size: $fonts.size.highlight;
 }
 
 small {
-  font-size: $fonts.size.small;
+  font-size: ($fonts.size.tiny + rem-calc(2));
 }
 
 strong, b {

@@ -2,9 +2,35 @@
   color: darken($colors.info, 40%);
   border-top: rem-calc(1) solid @color;
   background-color: $colors.info;
+  text-align: center;
 
   /[class*="footer__group-"] {
     padding-top: rem-calc(20);
     padding-bottom: rem-calc(20);
+
+    &:not(:last-child) {
+      border-bottom: @border-top;
+      border-color: darken($colors.info, 10%);
+    }
+  }
+
+  /.footer__group-social {
+    ul li {
+      display: inline-block;
+      padding: 0 rem-calc(10 / 2);
+    }
+  }
+
+  /.footer__group-phone {
+    text-transform: uppercase;
+
+    small {
+      font-weight: $fonts.weight.bold;
+      vertical-align: middle;
+    }
+
+    big {
+      color: $colors.light;
+    }
   }
 }

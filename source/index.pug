@@ -10,6 +10,7 @@
 - var socialInstagram = '#'
 
 - var imageLogo = '/assets/images/neon.png'
+- var imageBanner = '/assets/images/neon-tipo-um-banco.png'
 - var imageSocialFacebook = '/assets/images/neon-facebook.png'
 - var imageSocialTwitter = '/assets/images/neon-twitter.png'
 - var imageSocialLinkedin = '/assets/images/neon-linkedin.png'
@@ -45,11 +46,13 @@ html
 
     main.home
       div.grid
-        div.home__group-title
+        div.column.expand.home__group-title
+          img(src=imageBanner alt="Tipo um banco, só que mais seguro" aria-hidden="true")
+
           h2 Tipo um banco,
             strong só que mais seguro
 
-        div.carousel
+        div.column.expand.carousel
           button.button.hallow
             img(src="http://via.placeholder.com/65x65")
 
@@ -69,18 +72,18 @@ html
 
     footer.footer(role="content-info")
       div.grid
-        div.footer__group-phone
+        div.column.small-expand.footer__group-phone
           h3
             small Atendimento
             big 0800-606-7688
-        div.footer__group-social
+        div.column.small-expand.footer__group-social
           ul
             +social('Facebook', socialFacebook, imageSocialFacebook)
             +social('Twitter', socialTwitter, imageSocialTwitter)
             +social('LinkedIn', socialLinkedin, imageSocialLinkedin)
             +social('YouTube', socialYoutube, imageSocialYoutube)
             +social('Instagram', socialInstagram, imageSocialInstagram)
-        div.footer__group-address
+        div.column.small-expand.footer__group-address
           p
             small Banco Neon S.A - CNPJ 00.253.448/0001-17
               address Av. Raja Gabaglia, 1143/17°andar - CEP: 30380-403 <br /> Luxemburgo - Belo Horizonte - MG

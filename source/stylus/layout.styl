@@ -4,10 +4,15 @@ $gutter = {
 }
 
 $breakpoints = {
-  x-small: 0,
-  small: 30rem,
+  small: 0,
   medium: 48rem,
   large: 85.375rem
+}
+
+breakpoint($breakpoint) {
+  @media screen and (min-width: $breakpoints[$breakpoint]) {
+    {block}
+  }
 }
 
 body {
@@ -16,7 +21,6 @@ body {
 
 .grid {
   min-width: 100%;
-  max-width: $breakpoints.small;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -39,5 +43,15 @@ body {
 
   &.shrink {
     flex: 0 0 auto;
+  }
+
+  &.expand {
+    flex: 1 1 100%;
+  }
+
+  &.small-expand {
+    +breakpoint(small) {
+      flex: 1 1 100%;
+    }
   }
 }

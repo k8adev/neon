@@ -1,0 +1,25 @@
+.home {
+  text-align: center;
+
+  /.home__group-title {
+    position: relative;
+    overflow: hidden;
+    height: rem-calc(555);
+    color: $colors.light;
+    padding-top: rem-calc(107);
+    box-sizing: border-box;
+
+    & > img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+      width: 120%;
+    }
+
+    *:not(img) {
+      position: relative;
+      z-index: 2;
+    }
+  }
+}
