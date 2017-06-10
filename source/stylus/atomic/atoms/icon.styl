@@ -1,0 +1,75 @@
+/**
+ * Iconography.
+ */
+$icons = {
+  /**
+   * First key will be the class name.
+   */
+  arrow-gray: {
+    /**
+     * Accepts key as direction name that will to the class name too or
+     * can be applied rules directly to the class as in "download-yellow" key.
+     */
+    right: {
+      width: rem-calc(12),
+      height: rem-calc(11)
+    },
+    left: {
+      width: rem-calc(12),
+      height: rem-calc(11),
+      /**
+       * Needs only image position to creates others.
+       * For example, if needs opposite side,
+       * simply adds rules for it. Here is:
+       */
+      transform: rotate(180deg)
+    }
+  },
+  download-yellow: {
+    width: rem-calc(17),
+    height: rem-calc(21)
+  }
+}
+
+.icon {
+  position: relative;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  /**
+   * Creates icon based in {@var $icons} rules.
+   */
+  for $name, $x in $icons {
+    $class = $name;
+    $rules = {};
+
+    for $y, $z in $x {
+      if typeof($z) == 'object' {
+        $position = $y;
+        $rules = $z;
+        $class = $name + '-' + $position;
+
+        &.{$class}:before {
+          background-image: url($path + '/icon-' + $name + '.png');
+
+          for $property, $value in $rules {
+            {$property}: $value;
+          }
+        }
+      }
+
+      else {
+        $rules[$y] = $z;
+      }
+    }
+  }
+
+  &.{$class}:before {
+    background-image: url($path + '/icon-' + $name + '.png');
+    {$rules}
+  }
+}

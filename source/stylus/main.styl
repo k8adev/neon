@@ -1,4 +1,31 @@
-@import 'reset'
+/**
+ * Settings.
+ * Basic settings to project style.
+ */
+rem-calc($size) {
+  /**
+   * 16 is default font-size.
+   */
+  $size = unit($size, '') / 16;
+  $size = unit($size, 'rem');
 
-.teste
-  border-radius 16px
+  return $size;
+}
+
+$path = '/assets/images';
+
+/**
+ * Resets default styles from browser.
+ */
+@import 'reset'
+/**
+ * Requires settings and rules.
+ */
+@import 'colors'
+@import 'typography'
+@import 'layout'
+/**
+ * Import all components that you need
+ * through the atomic/atomic.styl file.
+ */
+@import 'atomic/atomic'

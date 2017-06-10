@@ -1,0 +1,41 @@
+$button = {
+  border-radius: rem-calc(30),
+  border-color: $colors.secondary,
+  min-height: rem-calc(40)
+}
+
+.button {
+  display: inline-block;
+  border-radius: $button.border-radius;
+  min-height: $button.min-height;
+  padding: 1.5ex 3ch;
+  box-sizing: border-box;
+
+  &:not(.hallow) {
+    for $name, $color in $colors {
+      &.{$name} {
+        color: $colors.light;
+        background-color: $color;
+
+        &.gradient {
+          background-image: linear-gradient(to right, lighten($color, 40%), $color);
+        }
+      }
+    }
+
+    &.info.success {
+      background-image: linear-gradient(to right, lighten($colors.info, 10%), $colors.success);
+    }
+  }
+
+  &.hallow {
+    border: rem-calc(1) solid $button.border-color;
+
+    for $name, $color in $colors {
+      &.{$name} {
+        color: $color;
+        border-color: @color;
+      }
+    }
+  }
+}

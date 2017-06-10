@@ -1,0 +1,43 @@
+$gutter = {
+  x-small: (rem-calc(20) / 2),
+  medium: (rem-calc(17) / 2)
+}
+
+$breakpoints = {
+  x-small: 0,
+  small: 30rem,
+  medium: 48rem,
+  large: 85.375rem
+}
+
+body {
+  max-width: 100%;
+}
+
+.grid {
+  min-width: 100%;
+  max-width: $breakpoints.small;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: inherit;
+  height: inherit;
+
+  &.middle {
+    align-items: center;
+  }
+
+  &.justify {
+    justify-content: space-between;
+  }
+}
+
+.column {
+  padding-left: $gutter.x-small;
+  padding-right: $gutter.x-small;
+  max-width: 100%;
+
+  &.shrink {
+    flex: 0 0 auto;
+  }
+}

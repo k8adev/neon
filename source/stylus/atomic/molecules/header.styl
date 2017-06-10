@@ -1,0 +1,23 @@
+.header {
+  min-height: rem-calc(80);
+  background-color: $colors.light;
+  border-bottom: rem-calc(1) solid $colors.secondary;
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: rem-calc(42);
+    height: rem-calc(42);
+    text-align: center;
+    padding: 0;
+
+    & > span {
+      display: inline-block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+  }
+}

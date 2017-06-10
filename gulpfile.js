@@ -18,7 +18,8 @@ const config = {
 const gulp = require('gulp');
 const grun = require('gulp-load-plugins')({
   pattern: [
-    'gulp-*'
+    'gulp-*',
+    '*-stylus'
   ]
 });
 
@@ -38,6 +39,26 @@ gulp.task('html', () => {
   return gsrc;
 });
 /**
+ * Fonts task.
+ */
+gulp.task('fonts', () => {
+  const gsrc = gulp.src(`${ config.path.source }/fonts/**/*.*`);
+
+  gsrc.pipe(gulp.dest(`${ config.path.public }/assets/fonts`));
+
+  return gsrc;
+});
+/**
+ * Images task.
+ */
+gulp.task('images', () => {
+  const gsrc = gulp.src(`${ config.path.source }/images/**/*.*`);
+
+  gsrc.pipe(gulp.dest(`${ config.path.public }/assets/images`));
+
+  return gsrc;
+});
+/**
  * CSS task.
  * @required {@link https://www.npmjs.com/package/browser-sync}
  * @required {@link https://www.npmjs.com/package/gulp-sourcemaps}
@@ -48,17 +69,21 @@ gulp.task('html', () => {
 gulp.task('css', () => {
   const gsrc = gulp.src(`${ config.path.source }/stylus/main.styl`);
 
+  gsrc.pipe(grun.plumber());
   gsrc.pipe(grun.sourcemaps.init());
   gsrc.pipe(grun.stylus({
-    compress: true
+    compress: false,
+    use: grun.autoprefixerStylus()
+  }).on('error', error => {
+    console.log(error.message);
   }));
-  gsrc.pipe(grun.autoprefixer());
   gsrc.pipe(grun.sourcemaps.write('.'));
   gsrc.pipe(grun.rename({
     suffix: '.min',
     extname: '.css'
   }));
   gsrc.pipe(gulp.dest(`${ config.path.public }/assets/css`));
+  gsrc.pipe(grun.plumber.stop());
   gsrc.pipe(browserSync.stream());
 
   return gsrc;
@@ -106,6 +131,8 @@ gulp.task('server', () => {
  */
 gulp.task('default', [
   'html',
+  'fonts',
+  'images',
   'css',
   'js'
 ]);

@@ -1,0 +1,83 @@
+@font-face {
+  font-family: Averta;
+  font-weight: 400;
+  src: url('/assets/fonts/Averta-Regular.otf');
+}
+
+@font-face {
+  font-family: Averta;
+  font-weight: 600;
+  src: url('/assets/fonts/Averta-Bold.otf');
+}
+
+@font-face {
+  font-family: Averta;
+  font-weight: 300;
+  src: url('/assets/fonts/Averta-Light.otf');
+}
+
+$fonts = {
+  family: {
+    default: Averta
+  },
+  weight: {
+    light: 300,
+    regular: 400,
+    semi-bold: 500,
+    bold: 600,
+    extra-bold: 700
+  },
+  size: {
+    extra-highlight: rem-calc(35),
+    highlight: rem-calc(30),
+    large: rem-calc(25),
+    medium: rem-calc(20),
+    small: rem-calc(15),
+    tiny: rem-calc(10)
+  }
+}
+
+body {
+  font-family: $fonts.family.default;
+  font-weight: $fonts.weight.regular;
+}
+
+h1, .heading--extra-highlight {
+  font-size: ($fonts.size.extra-highlight + rem-calc(5));
+}
+
+h2, .heading--highlight {
+  font-size: ($fonts.size.highlight + rem-calc(5));
+}
+
+h3, .heading--large {
+  font-size: ($fonts.size.large + rem-calc(5));
+}
+
+h4, .heading--medium {
+  font-size: ($fonts.size.medium + rem-calc(5));
+}
+
+h5, .heading--small {
+  font-size: ($fonts.size.small + rem-calc(5));
+}
+
+h6, .heading--tiny {
+  font-size: ($fonts.size.tiny + rem-calc(5));
+}
+
+big {
+  font-size: $fonts.size.large;
+}
+
+small {
+  font-size: $fonts.size.small;
+}
+
+strong, b {
+  font-weight: $fonts.weight.bold;
+}
+
+a {
+  text-decoration: none;
+}
