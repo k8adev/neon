@@ -1,86 +1,100 @@
-@font-face {
-  font-family: Averta;
-  font-weight: 400;
-  src: url('/assets/fonts/Averta-Regular.otf');
-}
-
-@font-face {
-  font-family: Averta;
-  font-weight: 600;
-  src: url('/assets/fonts/Averta-Bold.otf');
-}
-
-@font-face {
-  font-family: Averta;
-  font-weight: 300;
-  src: url('/assets/fonts/Averta-Light.otf');
-}
-
 $fonts = {
-  family: {
-    default: Averta
-  },
-  weight: {
-    light: 300,
-    regular: 400,
-    semi-bold: 500,
-    bold: 600,
-    extra-bold: 700
-  },
-  size: {
-    extra-highlight: rem-calc(35),
-    highlight: rem-calc(30),
-    large: rem-calc(25),
-    medium: rem-calc(20),
-    small: rem-calc(15),
-    tiny: rem-calc(10)
+  default: {
+    /**
+     * Family name must be same name included in file name.
+     */
+    family: 'averta',
+    /**
+     * Weight reference must have same name included in file name.
+     */
+    weight: {
+      light: 300,
+      regular: 400,
+      semibold: 500,
+      bold: 600,
+      extrabold: 700
+    },
+    size: {
+      extra-highlight: rem-calc(35),
+      highlight: rem-calc(30),
+      large: rem-calc(25),
+      medium: rem-calc(20),
+      small: rem-calc(15),
+      tiny: rem-calc(10)
+    }
+  }
+}
+
+for $name, $font in $fonts {
+  $family = $font.family;
+  /**
+   * Includes all fonts based in your weight.
+   */
+  for $name, $weight in $font.weight {
+    $src = $path + '/fonts/' + $family + '-' + $name + '-webfont';
+
+    @font-face {
+      font-family: $family;
+      font-weight: $weight;
+      font-style: normal;
+      src: url($src + '?#iefix') format('embedded-opentype'), url($src + '.woff') format('woff'), url($src + '.ttf') format('truetype'), url($src + '.svg#' + $family) format('svg');
+    }
   }
 }
 
 body {
-  font-family: $fonts.family.default;
-  font-weight: $fonts.weight.regular;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $fonts.default.family;
+  font-weight: $fonts.default.weight.regular;
   line-height: 1.4;
 }
 
 h1, h2, h3, h4, h5, h6 {
   display: inline-block;
+  line-height: 1;
 }
 
 h1, .heading--extra-highlight {
-  font-size: ($fonts.size.extra-highlight + rem-calc(5));
+  font-size: ($fonts.default.size.extra-highlight + rem-calc(5));
 }
 
 h2, .heading--highlight {
-  font-size: ($fonts.size.highlight + rem-calc(5));
+  font-size: ($fonts.default.size.highlight + rem-calc(5));
 }
 
 h3, .heading--large {
-  font-size: ($fonts.size.large + rem-calc(5));
+  font-size: ($fonts.default.size.large + rem-calc(5));
 }
 
 h4, .heading--medium {
-  font-size: ($fonts.size.medium + rem-calc(5));
+  font-size: ($fonts.default.size.medium + rem-calc(5));
 }
 
 h5, .heading--small {
-  font-size: ($fonts.size.small + rem-calc(5));
+  font-size: ($fonts.default.size.small + rem-calc(5));
 }
 
 h6, .heading--tiny {
-  font-size: ($fonts.size.tiny + rem-calc(5));
+  font-size: ($fonts.default.size.tiny + rem-calc(5));
 }
 
 big {
-  font-size: $fonts.size.highlight;
+  /**
+   * Largest text found in project is 40.
+   */
+  font-size: ($fonts.default.size.extra-highlight + rem-calc(5));
 }
 
 small {
-  font-size: ($fonts.size.tiny + rem-calc(2));
+  /**
+   * Smaller text found in project is 14.
+   */
+  font-size: ($fonts.default.size.tiny + rem-calc(4));
 }
 
 strong, b {
-  font-weight: $fonts.weight.bold;
+  font-weight: $fonts.default.weight.bold;
 }
 
 a {

@@ -1,20 +1,23 @@
 .footer {
-  color: darken($colors.info, 40%);
-  border-top: rem-calc(1) solid @color;
+  color: #0c4a6e;
+  color: darken($colors.info, 30%);
+  border-top: rem-calc(2) solid @color;
   background-color: $colors.info;
   text-align: center;
 
   /[class*="footer__group-"] {
-    padding-top: rem-calc(20);
-    padding-bottom: rem-calc(20);
-
-    &:not(:last-child) {
-      border-bottom: @border-top;
-      border-color: darken($colors.info, 10%);
-    }
+    padding-top: $margin;
+    padding-bottom: $margin;
   }
 
   /.footer__group-social {
+    border-top: rem-calc(1) solid darken($colors.info, 10%);
+    border-bottom: @border-top;
+
+    +breakpoint(large) {
+      border: 0;
+    }
+
     ul li {
       display: inline-block;
       padding: 0 rem-calc(10 / 2);
@@ -25,12 +28,30 @@
     text-transform: uppercase;
 
     small {
-      font-weight: $fonts.weight.bold;
+      font-size: $fonts.default.size.small;
+      font-weight: $fonts.default.weight.bold;
       vertical-align: middle;
     }
 
     big {
       color: $colors.light;
+      font-size: 7vmin;
+
+      +breakpoint(medium) {
+        font-size: $fonts.default.size.extra-highlight;
+      }
+    }
+  }
+
+  /.footer__group-address {
+    /**
+     * Layout says regular weight,
+     * my heart says semibold weight.
+     */
+    font-weight: $fonts.default.weight.semibold;
+
+    +breakpoint(large) {
+      text-align: left;
     }
   }
 }

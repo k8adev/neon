@@ -1,35 +1,62 @@
 $button = {
   border-radius: rem-calc(30),
   border-color: $colors.secondary,
+  padding: 1.5ex 3ch,
   min-height: rem-calc(40)
+}
+
+button($background, $color = $colors.light) {
+  color: $color;
+  background-color: $colors[$background];
+  border-color: @background-color;
+}
+
+button-color-gradient($color-left, $color-right = $color-left) {
+  background-image: linear-gradient(to right, lighten($color-left, 20%), $color-right);
+  transition: box-shadow 400ms cubic-bezier(.2, 0, .7, 1);
+
+  &:hover,
+  &:focus {
+    box-shadow: 6px 0 0 0 rgba($color-right, 0.4), 10px 0 0 0 rgba($color-right, 0.3), 16px 0 0 0 rgba($color-right, 0.2);
+  }
 }
 
 .button {
   display: inline-block;
   border-radius: $button.border-radius;
   min-height: $button.min-height;
-  padding: 1.5ex 3ch;
+  padding: $button.padding;
   box-sizing: border-box;
 
   &:not(.hallow) {
     for $name, $color in $colors {
       &.{$name} {
-        color: $colors.light;
         background-color: $color;
 
         &.gradient {
-          background-image: linear-gradient(to right, lighten($color, 40%), $color);
+          button-color-gradient($color);
         }
       }
     }
 
-    &.info.success {
-      background-image: linear-gradient(to right, lighten($colors.info, 10%), $colors.success);
+    &.info, &.success {
+      color: $colors.light;
+    }
+
+    &.warning {
+      color: darken($colors.warning, 30%);
+    }
+
+    &.gradient {
+      &.info.success {
+        button-color-gradient($colors.info, $colors.success);
+      }
     }
   }
 
   &.hallow {
-    border: rem-calc(1) solid $button.border-color;
+    background-color: transparent;
+    border: rem-calc(2) solid $button.border-color;
 
     for $name, $color in $colors {
       &.{$name} {

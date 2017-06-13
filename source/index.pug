@@ -1,91 +1,147 @@
-//- Assets.
+//- Files.
 - var fileCSS = '/assets/css/main.min.css'
-- var fileJS = '/assets/js/main.min.js'
+- var fileJS = '/assets/js/main.min.js';
+- var fileJSPolyfill = '/assets/js/polyfill.min.js';
 
-//- Social medias.
-- var socialFacebook = '#'
-- var socialTwitter = '#'
-- var socialLinkedin = '#'
-- var socialYoutube = '#'
-- var socialInstagram = '#'
+//- Breakpoints
+- var breakpointsSmall = '0rem';
+- var breakpointsMedium = '40rem';
+- var breakpointsLarge = '85.375rem';
 
-- var imageLogo = '/assets/images/neon.png'
-- var imageBanner = '/assets/images/neon-tipo-um-banco.png'
-- var imageSocialFacebook = '/assets/images/neon-facebook.png'
-- var imageSocialTwitter = '/assets/images/neon-twitter.png'
-- var imageSocialLinkedin = '/assets/images/neon-linkedin.png'
-- var imageSocialYoutube = '/assets/images/neon-youtube.png'
-- var imageSocialInstagram = '/assets/images/neon-instagram.png'
+//- Links.
+- var linkSocialFacebook = 'https://www.facebook.com/banconeon';
+- var linkSocialTwitter = 'https://twitter.com/banconeon';
+- var linkSocialLinkedin = 'https://www.linkedin.com/company-beta/448644';
+- var linkSocialYoutube = 'https://www.youtube.com/channel/UCh0hogVKGu8Wx5i6lwudPEg';
+- var linkSocialInstagram = 'https://www.instagram.com/banconeon/';
+- var linkDownloadAndroid = 'https://play.google.com/store/apps/details?id=br.com.neon';
+- var linkDownloadIos = 'https://itunes.apple.com/br/app/neon/id1127996388?mt=8';
+
+//- Images
+- var imageLogo = '/assets/images/neon.png';
+- var imageFavicon = '/assets/images/favicon.png';
+- var imageSocialFacebook = '/assets/images/neon-facebook.png';
+- var imageSocialTwitter = '/assets/images/neon-twitter.png';
+- var imageSocialLinkedin = '/assets/images/neon-linkedin.png';
+- var imageSocialYoutube = '/assets/images/neon-youtube.png';
+- var imageSocialInstagram = '/assets/images/neon-instagram.png';
+- var imageCarouselBiometria = '/assets/images/neon-biometria.png';
+- var imageBannerSloganSmall = '/assets/images/neon-tipo-um-banco@small.png';
+- var imageBannerSloganLarge = '/assets/images/neon-tipo-um-banco@large.png';
 
 //- Mixin for links to social media.
 mixin social(title, href, src)
   li
-    a(href=href title=title target="_blank" aria-label=`Ir para nossa página no ${title}`)
+    a(href=href title=title target="_blank")
       img(src=src alt=title)
+
 html
   head
-    title Neon
+    title Banco Neon
 
+    meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+    meta(name="description" content="O banco Neon é tipo um banco, só que totalmente diferente. Queremos provar que você não precisa odiar seu banco. Peça sua conta!")
 
-    link(type="text/css" href=fileCSS rel="stylesheet")
-  body
+    link(rel="icon" href=imageFavicon)
+
+    link(rel="stylesheet" type="text/css" href=fileCSS)
+
+    script(type="text/javascript" href=fileJSPolyfill)
+
+  body(itemscope="" itemtype="http://schema.org/WebSite")
     header.header(role="banner")
       div.grid.middle.justify
         div.column.shrink.header__group-home
-          a.button.hallow.icon.arrow-gray-right(href="#" title="Início" aria-label="Voltar para a página inicial")
+          a.button.hallow.icon.arrow-gray-left(href="#" title="Início")
             span Início
 
         div.column.header__group-logo
           h1
-            img(src=imageLogo alt="Neon" aria-label="Logo Neon")
+            img(src=imageLogo alt="Neon")
+            span Banco Neon
 
         div.column.shrink.header__group-download
-          a.button.warning.gradient.icon.download-yellow(href="#" title="Baixar App" target="_blank" aria-label="Baixar nosso aplicativo")
-            span Baixar o APP
+          a.button.warning.gradient.icon.download-yellow.hide(href=linkDownloadAndroid title="Baixar App" target="_blank" data-id="download-android")
+            span Baixe o APP
+
+          a.button.warning.gradient.icon.download-yellow(href=linkDownloadIos title="Baixar App" target="_blank" data-id="download-ios")
+            span Baixe o APP
 
     main.home
-      div.grid
-        div.column.expand.home__group-title
-          img(src=imageBanner alt="Tipo um banco, só que mais seguro" aria-hidden="true")
+      div.grid.middle
+        div.column.expand.collapse
+          div.home__group-title
+            picture
+              source(srcset=imageBannerSloganLarge media=`(min-width: ${breakpointsMedium})`)
+              source(srcset=imageBannerSloganSmall media=`(min-width: ${breakpointsSmall})`)
+              img(src=imageBannerSloganLarge alt="Tipo um banco, só que mais seguro" data-id="home-banner")
 
-          h2 Tipo um banco,
-            strong só que mais seguro
+            h2(data-id="home-banner-title") Tipo um banco<span>,</span> <br />
+              strong só que mais seguro
 
-        div.column.expand.carousel
-          button.button.hallow
-            img(src="http://via.placeholder.com/65x65")
+        div.column.expand
+          div.carousel(data-carousel="")
+            div.carousel__group-button
+              button.button.hallow.icon.carousel-arrow-gray-left(data-carousel-previous="")
 
-          div.carousel__slides
-            div.card
-              img(src="http://via.placeholder.com/150x150" alt="Biometria" aria-labelledby="about-neon-biometria")
-              h3#about-neon-biometria Biometria
+            div.carousel__group-slides(data-carousel-slides="")
+              div.card(data-carousel-slides-items="").active
+                div.card__group
+                  img(src=imageCarouselBiometria alt="Biometria")
 
-              hr
+                div.card__group
+                  h3 Biometria
 
-              p Reconhecimento por selfie ou digital, tudo para oferecer o máximo de segurança.
+                div.card__group
+                  p Reconhecimento por selfie ou digital, tudo para oferecer o máximo de segurança.
 
-              a.button.info.success(href="#" title="Saiba mais" aria-label="Ler mais sobre nossa biometria") Saiba mais
+                div.card__group
+                  a.button.info.success.gradient(href="https://www.banconeon.com.br/" title="Saiba mais" target="_blank") Saiba mais
 
-          button.button.hallow
-            img(src="http://via.placeholder.com/65x65")
+              div.card(data-carousel-slides-items="").disable
+                div.card__group
+                  img(src=imageCarouselBiometria alt="Biometria" aria-hidden="true")
+
+                div.card__group
+                  h3 Biometria
+
+                div.card__group
+                  p Reconhecimento por selfie ou digital, tudo para oferecer o máximo de segurança.
+
+                div.card__group
+                  a.button.info.success.gradient(href="https://www.banconeon.com.br/" title="Saiba mais" target="_blank") Saiba mais
+
+            div.carousel__group-button
+              button.button.hallow.icon.carousel-arrow-gray-right(data-carousel-next="")
 
     footer.footer(role="content-info")
-      div.grid
-        div.column.small-expand.footer__group-phone
-          h3
-            small Atendimento
-            big 0800-606-7688
-        div.column.small-expand.footer__group-social
-          ul
-            +social('Facebook', socialFacebook, imageSocialFacebook)
-            +social('Twitter', socialTwitter, imageSocialTwitter)
-            +social('LinkedIn', socialLinkedin, imageSocialLinkedin)
-            +social('YouTube', socialYoutube, imageSocialYoutube)
-            +social('Instagram', socialInstagram, imageSocialInstagram)
-        div.column.small-expand.footer__group-address
-          p
-            small Banco Neon S.A - CNPJ 00.253.448/0001-17
-              address Av. Raja Gabaglia, 1143/17°andar - CEP: 30380-403 <br /> Luxemburgo - Belo Horizonte - MG
+      div.grid.middle.justify
+        div.column.expand.large-shrink.large-order-2
+          div.footer__group-phone
+            h3
+              small Atendimento
+              big 0800-606-7688
 
-    script(type="text/javascript" href=fileJS)
+        div.column.expand.large-shrink.collapse.large-uncollapse.large-order-3
+          div.footer__group-social
+            ul
+              +social('Facebook', linkSocialFacebook, imageSocialFacebook)
+              +social('Twitter', linkSocialTwitter, imageSocialTwitter)
+              +social('LinkedIn', linkSocialLinkedin, imageSocialLinkedin)
+              +social('YouTube', linkSocialYoutube, imageSocialYoutube)
+              +social('Instagram', linkSocialInstagram, imageSocialInstagram)
+
+        div.column.expand.large-shrink.large-order-1
+          div.footer__group-address(itemscope="" itemtype="http://schema.org/Organization")
+            p
+              small
+                span(itemprop="name") Banco Neon S.A
+                | &nbsp;- CNPJ 00.253.448/0001-17
+                address(itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress")
+                  span(itemprop="streetAddress") Av. Raja Gabaglia, 1143/17°andar
+                  | &nbsp;- CEP:
+                  span(itemprop="postalCode") 30380-403 <br />
+                  span(itemprop="addressLocality") Luxemburgo - Belo Horizonte - MG
+
+    script(type="text/javascript" src=fileJS)

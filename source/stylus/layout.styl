@@ -1,17 +1,29 @@
+$padding = rem-calc(10);
+$margin = rem-calc(15);
+$border-radius = rem-calc(50);
+
 $gutter = {
-  x-small: (rem-calc(20) / 2),
-  medium: (rem-calc(17) / 2)
+  small: (rem-calc(20) / 2),
+  medium: (rem-calc(17) / 2),
+  large: (rem-calc(17) / 2)
 }
 
 $breakpoints = {
-  small: 0,
-  medium: 48rem,
-  large: 85.375rem
+  small: 0rem,
+  medium: rem-calc(640),
+  large: rem-calc(1366)
 }
 
 breakpoint($breakpoint) {
-  @media screen and (min-width: $breakpoints[$breakpoint]) {
-    {block}
+  if match('small|medium|large', $breakpoint) {
+    @media screen and (min-width: $breakpoints[$breakpoint]) {
+      {block}
+    }
+  }
+  else {
+    @media $breakpoint {
+      {block}
+    }
   }
 }
 
@@ -27,6 +39,11 @@ body {
   min-height: inherit;
   height: inherit;
 
+  +breakpoint(large) {
+    min-width: auto;
+    max-width: $breakpoints.large;
+  }
+
   &.middle {
     align-items: center;
   }
@@ -37,9 +54,14 @@ body {
 }
 
 .column {
-  padding-left: $gutter.x-small;
-  padding-right: $gutter.x-small;
+  padding-left: $gutter.small;
+  padding-right: $gutter.small;
   max-width: 100%;
+
+  +breakpoint(large) {
+    padding-left: $gutter.large;
+    padding-right: @padding-left;
+  }
 
   &.shrink {
     flex: 0 0 auto;
@@ -49,9 +71,29 @@ body {
     flex: 1 1 100%;
   }
 
-  &.small-expand {
-    +breakpoint(small) {
-      flex: 1 1 100%;
+  &.large-shrink {
+    +breakpoint(large) {
+      flex: 0 0 auto;
+    }
+  }
+
+  &.collapse {
+    padding-left: 0;
+    padding-right: @padding-left;
+  }
+
+  &.large-uncollapse {
+    +breakpoint(large) {
+      padding-left: $gutter.large;
+      padding-right: @padding-left;
+    }
+  }
+
+  for $i in 1..3 {
+    &.large-order-{$i} {
+      +breakpoint(large) {
+        order: $i;
+      }
     }
   }
 }

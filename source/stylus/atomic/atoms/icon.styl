@@ -1,6 +1,3 @@
-/**
- * Iconography.
- */
 $icons = {
   /**
    * First key will be the class name.
@@ -10,11 +7,11 @@ $icons = {
      * Accepts key as direction name that will to the class name too or
      * can be applied rules directly to the class as in "download-yellow" key.
      */
-    right: {
+    left: {
       width: rem-calc(12),
       height: rem-calc(11)
     },
-    left: {
+    right: {
       width: rem-calc(12),
       height: rem-calc(11),
       /**
@@ -25,9 +22,37 @@ $icons = {
       transform: rotate(180deg)
     }
   },
+  carousel-arrow-gray: {
+    left: {
+      width: rem-calc(14),
+      height: rem-calc(28)
+    },
+    right: {
+      width: rem-calc(14),
+      height: rem-calc(28),
+      transform: rotate(180deg)
+    }
+  },
+  carousel-arrow-white: {
+    left: {
+      width: rem-calc(14),
+      height: rem-calc(28)
+    },
+    right: {
+      width: rem-calc(14),
+      height: rem-calc(28),
+      transform: rotate(180deg)
+    }
+  },
   download-yellow: {
     width: rem-calc(17),
     height: rem-calc(21)
+  }
+}
+
+icon($name) {
+  &:before {
+    background-image: url($path + '/images/icon-' + $name + '.png');
   }
 }
 
@@ -54,7 +79,7 @@ $icons = {
         $class = $name + '-' + $position;
 
         &.{$class}:before {
-          background-image: url($path + '/icon-' + $name + '.png');
+          background-image: url($path + '/images/icon-' + $name + '.png');
 
           for $property, $value in $rules {
             {$property}: $value;
@@ -69,7 +94,7 @@ $icons = {
   }
 
   &.{$class}:before {
-    background-image: url($path + '/icon-' + $name + '.png');
+    background-image: url($path + '/images/icon-' + $name + '.png');
     {$rules}
   }
 }

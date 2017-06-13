@@ -1,0 +1,142 @@
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: rem-calc(450);
+  margin: rem-calc(55) auto;
+
+  +breakpoint(medium) {
+    max-width: 100%;
+  }
+
+  /[class*="carousel__group"] {
+    height: auto;
+  }
+
+  /.carousel__group-slides {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    /**
+     * Overflow hiddens card shadow, so
+     * this is basically a copy of effect for container.
+     */
+    border-radius: $card.border-radius;
+    box-shadow: $card.box-shadow;
+    transition: opacity .5s ease;
+
+    +breakpoint(medium) {
+      max-width: rem-calc(450);
+    }
+
+    +breakpoint(large) {
+      max-width: rem-calc(843);
+    }
+
+    &.active {
+      opacity: 1;
+    }
+
+    &.disable {
+      opacity: 0;
+    }
+
+    & > * {
+      transition: all 1.5s ease;
+    }
+
+    & > .active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    & > .disable {
+      transform: translateY(-10%);
+      left: 0;
+      top: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: -1;
+    }
+  }
+
+  /.carousel__group-button {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(50%);
+    z-index: 2;
+
+    +breakpoint(medium) {
+      position: static;
+    }
+
+    .button {
+      padding: 0;
+      width: rem-calc(60);
+      height: rem-calc(60);
+      background-color: $colors.light;
+      border-width: rem-calc(2);
+      border-color: #d7d8da;
+      transition: all .5s ease;
+
+      +breakpoint(medium) {
+        background-color: transparent;
+      }
+
+      &:hover,
+      &:focus {
+        button(info);
+        box-shadow: 0 rem-calc(10) rem-calc(20) 0 rgba($colors.info, .4);
+      }
+    }
+
+    &:first-child {
+      left: rem-calc(-3);
+
+      +breakpoint(medium) {
+        left: initial;
+      }
+
+      button {
+        margin-right: $margin;
+
+        +breakpoint(large) {
+          margin-right: rem-calc(85);
+        }
+
+        &:hover,
+        &:focus {
+          icon(carousel-arrow-white);
+        }
+      }
+    }
+
+    &:last-child {
+      right: rem-calc(-3);
+
+      +breakpoint(medium) {
+        right: initial;
+      }
+
+      button {
+        margin-left: $margin;
+
+        +breakpoint(large) {
+          margin-left: rem-calc(85);
+        }
+
+        &:hover,
+        &:focus {
+          icon(carousel-arrow-white);
+        }
+      }
+    }
+  }
+
+  h3 {
+    color: $colors.info;
+  }
+}

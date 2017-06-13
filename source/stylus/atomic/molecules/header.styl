@@ -1,7 +1,11 @@
+$header = {
+  height: rem-calc(80)
+}
+
 .header {
-  min-height: rem-calc(80);
+  min-height: $header.height;
   background-color: $colors.light;
-  border-bottom: rem-calc(1) solid $colors.secondary;
+  box-shadow: 0 0 rem-calc(10) rem-calc(5) rgba($colors.dark, .1);
 
   .button {
     display: inline-flex;
@@ -13,11 +17,57 @@
     padding: 0;
 
     & > span {
-      display: inline-block;
       position: absolute;
       width: 0;
       height: 0;
       overflow: hidden;
+    }
+  }
+
+  /.header__group-logo {
+    span {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    img {
+      +breakpoint(large) {
+        transform: translateX(50%);
+      }
+    }
+  }
+
+  /.header__group-download .button {
+    +breakpoint(large) {
+      width: auto;
+      height: auto;
+      display: initial;
+      padding: $button.padding;
+      text-transform: uppercase;
+      font-size: $fonts.default.size.small;
+      font-weight: $fonts.default.weight.semibold;
+    }
+
+    & > span {
+      +breakpoint(large) {
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+      }
+    }
+
+    &.hide {
+      display: none;
+    }
+
+    &.icon:before {
+      +breakpoint(large) {
+        margin-right: $margin;
+        vertical-align: bottom;
+      }
     }
   }
 }

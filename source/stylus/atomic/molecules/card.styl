@@ -1,0 +1,52 @@
+$card = {
+  border-radius: $border-radius,
+  box-shadow: 3px 11px 17px 10px rgba($colors.secondary, .25)
+}
+
+.card {
+  background-color: $colors.light;
+  border-radius: $card.border-radius;
+  box-sizing: border-box;
+  padding: rem-calc(35) rem-calc(20);
+  color: $colors.secondary;
+  box-shadow: $card.box-shadow;
+
+  +breakpoint(large) {
+    padding: rem-calc(85);
+  }
+
+  /[class*="card__group"] {
+    &:not(:last-child) {
+      margin-bottom: ($margin + rem-calc(5));
+    }
+  }
+
+  h3 {
+    display: block;
+    font-weight: $fonts.default.weight.extrabold;
+    font-size: $fonts.default.size.medium;
+    text-transform: uppercase;
+    padding-bottom: rem-calc(20);
+    border-bottom: rem-calc(1) solid $colors.secondary;
+    letter-spacing: 1;
+  }
+
+  p {
+    display: inline-block;
+    font-size: $fonts.default.size.medium;
+    color: darken($colors.secondary, 25%);
+    margin-bottom: rem-calc(5);
+
+    +breakpoint('screen and (min-width:'+ rem-calc(375) + ')') {
+      padding-left: ($padding * 3);
+      padding-right: ($padding * 3);
+    }
+  }
+
+  .button {
+    font-weight: $fonts.default.weight.extrabold;
+    font-size: ($fonts.default.size.medium - rem-calc(3));
+    text-transform: uppercase;
+    letter-spacing: 3;
+  }
+}
